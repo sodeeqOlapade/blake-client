@@ -1,63 +1,159 @@
-import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Redirect, Link } from 'react-router-dom';
+import styles from './signup.module.css';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import styles from './signup.module.css';
-import Form from '../../components/form/form';
-import LoginstatusContext from '../../context';
-import app from '../../firebaseconfig';
+import Input from '../../components/input/input';
+import Button from '../../components/button/button';
 
-// Add the Firebase products that you want to use
-import 'firebase/auth';
+function Signup(props) {
+  const [business, setBusiness] = useState(true);
 
-function Signup() {
-  const [redirect, setRedirect] = useState(false);
-  const { loggedIn, setLoggedIn } = useContext(LoginstatusContext);
-
-  console.log('from sign up: ', loggedIn);
-  console.log('from sign up: ', setLoggedIn);
-
-  const createUser = (email, password) => {
-    app
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(response => {
-        // console.log(response);
-        setLoggedIn(!!response);
-        setRedirect(true);
-      })
-      .catch(function(error) {
-        console.log('Errorrrrrr:');
-        var errorCode = error.code;
-        var errorMessage = error.message;
-
-        console.log('err: ', errorCode, 'msg: ', errorMessage);
-      });
+  const handleClick = event => {
+    setBusiness(!business);
   };
-
-  if (redirect) {
-    return <Redirect to="/about" />;
-  }
-
   return (
     <>
       <Header />
       <section className={styles.mainSection}>
-        <div className={styles.scalfold}>
-          <div className={styles.display}>
-            <span className={styles.blake}>.Blake</span>
-            <h4>
-              img elements must have an alt prop, either with meaningful text,
-              or an empty string for decorative images
-            </h4>
-          </div>
+        <img alt="login-svg" src="assets/images/email-illustration1.svg" />
+        <div className={styles.formcontainer}>
+          <h2>Need an account?</h2>
+          <h3>Please Signup.</h3>
+          {business ? (
+            <>
+              <form>
+                <Input
+                  placeholder="fullname"
+                  id="name"
+                  value=""
+                  label="name"
+                  type="text"
+                  handleChange=""
+                />
+                <Input
+                  placeholder="email"
+                  id="email"
+                  value=""
+                  label="email"
+                  type="email"
+                  handleChange=""
+                />
+                <Input
+                  placeholder="phone number"
+                  id="phonenumber"
+                  value=""
+                  label="phonenumber"
+                  type="number"
+                  handleChange=""
+                />
+                <Input
+                  placeholder="address"
+                  id="address"
+                  value=""
+                  label="address"
+                  type="text"
+                  handleChange=""
+                />
+                <Input
+                  placeholder="password"
+                  id="password"
+                  value=""
+                  label="password"
+                  type="password"
+                  handleChange=""
+                />
+                <Input
+                  placeholder="confirm password"
+                  id="cpassword"
+                  value=""
+                  label="cpassword"
+                  type="password"
+                  handleChange=""
+                />
 
-          <div className={styles.form}>
-            <div className={styles.signupTitle}>
-              <h2>SIGN UP</h2>
-            </div>
-            <Form onSubmit={createUser} />
-          </div>
+                <Button
+                  primary={false}
+                  textValue="Sign Up"
+                  className={styles.signupButton}
+                />
+              </form>
+
+              <p>
+                Already have an account?
+                <Link className={styles.link} to="/login">
+                  Login
+                </Link>
+              </p>
+              <div id={styles.business}>
+                <Button
+                  primary={true}
+                  textValue="SIGN UP AS A CUSTOMER"
+                  className={styles.signupButton}
+                  click={handleClick}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <form>
+                <Input
+                  placeholder="fullname"
+                  id="name"
+                  value=""
+                  label="name"
+                  type="text"
+                  handleChange=""
+                />
+                <Input
+                  placeholder="email"
+                  id="email"
+                  value=""
+                  label="email"
+                  type="email"
+                  handleChange=""
+                />
+                <Input
+                  placeholder="password"
+                  id="password"
+                  value=""
+                  label="password"
+                  type="password"
+                  handleChange=""
+                />
+                <Input
+                  placeholder="confirm password"
+                  id="cpassword"
+                  value=""
+                  label="cpassword"
+                  type="password"
+                  handleChange=""
+                />
+
+                <Button
+                  primary={false}
+                  textValue="Sign Up"
+                  className={styles.signupButton}
+                />
+              </form>
+
+              <p>
+                Already have an account?
+                <Link className={styles.link} to="/login">
+                  Login
+                </Link>
+                <br />
+              </p>
+              <div id={styles.business}>
+                <Button
+                  primary={true}
+                  textValue="SIGN UP AS A BUSINESS"
+                  className={styles.signupButton}
+                  click={handleClick}
+                />
+              </div>
+            </>
+          )}
         </div>
       </section>
       <Footer />

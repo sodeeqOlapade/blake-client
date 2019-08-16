@@ -32,17 +32,24 @@ function Login(props) {
               type="password"
               handleChange=""
             />
-
-            <Button
-              primary={false}
-              textValue="Login"
-              className={styles.signupButton}
-            />
-            <p>
-              Don't have an account? <Link className={styles.link} to="/register">Singup</Link> <br/>
-              <Link className={styles.link} to="/forgot-password"> Forgot Password?</Link>
-            </p>
           </form>
+
+          <Button
+            primary={false}
+            textValue="Login"
+            className={styles.signupButton}
+          />
+          <p>
+            Don't have an account?{' '}
+            <Link className={styles.link} to="/signup">
+              Singup
+            </Link>{' '}
+            <br />
+            <Link className={styles.link} to="/forgot-password">
+              {' '}
+              Forgot Password?
+            </Link>
+          </p>
         </div>
       </section>
       <Footer />
