@@ -5,10 +5,18 @@ label {
 
 input {
   padding: 12px;
-  width: 350px;
+  width: 270px;
   font-size: 16px;
   font-weight: 500;
   border: 1px solid #18a668;
-  border-radius: 3px;
   margin: 5px 0px;
+}
+
+input:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #18a668;
+  outline: 0;
+  box-shadow: 0 0 0 0.15rem rgba(121, 219, 170, 0.89);
+  transition: border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }

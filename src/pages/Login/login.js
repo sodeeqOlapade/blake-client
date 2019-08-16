@@ -1,59 +1,48 @@
-import React, {useState} from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Redirect, Link } from 'react-router-dom';
 import styles from './login.module.css';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import Form from '../../components/form/form';
-import * as firebase from 'firebase/app';
-import firebaseConfig from '../../firebaseconfig';
-// Add the Firebase products that you want to use
-import 'firebase/auth';
-// firebase.initializeApp(firebaseConfig);
-
-
+import Input from '../../components/input/input';
+import Button from '../../components/button/button';
 
 function Login(props) {
-  const [redirect, setRedirect] = useState(false);
-
-  const loginUser = (email, password) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(response => {
-        console.log(response)
-        setRedirect(true);
-      })
-      .catch(function(error) {
-        console.log('Errorrrrrr:');
-        var errorCode = error.code;
-        var errorMessage = error.message;
-
-        console.log('err: ', errorCode, 'msg: ', errorMessage);
-      });
-  };
-
-  if (redirect) {
-    return <Redirect to="/about" />;
-  }
   return (
     <>
       <Header />
       <section className={styles.mainSection}>
-        <div className={styles.scalfold}>
-          <div className={styles.display}>
-            {/* <span className={styles.blake}>.Blake</span>
-            <h4>
-              img elements must have an alt prop, either with meaningful text,
-              or an empty string for decorative images
-            </h4> */}
-          </div>
+        <img alt="login-svg" src="assets/images/email-illustration1.svg" />
+        <div className={styles.formcontainer}>
+          <h2>Welcome Back,</h2>
+          <h3>Please Login.</h3>
+          <form>
+            <Input
+              placeholder="E.g abx@example.com"
+              id="email"
+              value=""
+              label="email"
+              type="email"
+              handleChange=""
+            />
+            <Input
+              placeholder="E.g $abc123$"
+              id="password"
+              value=""
+              label="password"
+              type="password"
+              handleChange=""
+            />
 
-          <div className={styles.form}>
-            <div className={styles.signupTitle}>
-              <h2>LOGIN</h2>
-            </div>
-            <Form onSubmit={loginUser} />
-          </div>
+            <Button
+              primary={false}
+              textValue="Login"
+              className={styles.signupButton}
+            />
+            <p>
+              Don't have an account? <Link className={styles.link} to="/register">Singup</Link> <br/>
+              <Link className={styles.link} to="/forgot-password"> Forgot Password?</Link>
+            </p>
+          </form>
         </div>
       </section>
       <Footer />
