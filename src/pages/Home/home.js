@@ -3,6 +3,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import styles from './home.module.css';
 import Button from '../../components/button/button';
+import Input from '../../components/input/input';
 import { Link } from 'react-router-dom';
 import Card from '../../components/card/card';
 import LoginstatusContext from '../../context';
@@ -13,38 +14,35 @@ function Home(props) {
   return (
     <>
       <Header />
-      <div className={styles.bannerContainer}>
-        <div className={styles.bannerText}>
-          <div className={styles.texts}>
-            <span>
-              Businesses <span className={styles.business}>build</span>
-            </span>
-            <span>
-              Users <span className={styles.use}>use</span>
-            </span>
-            <span className={styles.connect}>
-              .Blake <span>connects</span>
-            </span>
-          </div>
-
-          <div className={styles.buttons}>
-            <Link to="/signup">
-              <Button
-                primary={true}
-                textValue="Get Started"
-                className={styles.primary}
-              />
-            </Link>
-            <Link to="/about">
-              <Button primary={false} textValue="Read More" />
-            </Link>
-          </div>
-        </div>
-
-        <div className={styles.bannerPic} />
+      <div className={styles.mainDisplayText}>
+        <p>Seamless communication</p>
+        <p>between businesses and customers</p>
+        <span>
+          .Blake serves as a conduit for free flow of instant feedback
+        </span>
+        <span>from customers to businesses they patronise to</span>
+        <span>enhance growth and productivity.</span>
+        <form className={styles.search}>
+            <Input
+              placeholder="search for a business"
+              id="search"
+              value=""
+              label="search"
+              type="text"
+              handleChange=""
+            />
+            <Button
+              type="primary"
+              textValue="Search"
+              className={styles.signupButton}
+            />
+          </form>
+        <Link to="/signup">
+          <Button id={styles.getStarted} primary={false} textValue="Get Started" />
+        </Link>
       </div>
 
-      <h2 className={styles.pros}>With Blake, you've got...</h2>
+      <h2 className={styles.pros}>Why does your business needs Blake?</h2>
 
       <div className={styles.cards}>
         <Card
@@ -77,6 +75,27 @@ function Home(props) {
           imagename="feedback.png"
           description="img elements must have an alt prop, either with meaningful text, or an empty string for decorative images "
         />
+      </div>
+      <div className={styles.bannerContainer}>
+        <div className={styles.bannerText}>
+          <div className={styles.texts}>
+            <span>
+              Businesses <span className={styles.business}>build</span>
+            </span>
+            <span>
+              Users <span className={styles.use}>use</span>
+            </span>
+            <span className={styles.connect}>
+              .Blake <span>connects</span>
+            </span>
+          </div>
+        </div>
+
+        <div className={styles.testimonials}>
+          <h1>
+            Testimonials
+          </h1>
+        </div>
       </div>
       <Footer />
     </>

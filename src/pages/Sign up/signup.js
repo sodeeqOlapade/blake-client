@@ -26,7 +26,7 @@ function Signup(props) {
                 <Input
                   placeholder="fullname"
                   id="name"
-                  value=""
+                  value="sodeeq"
                   label="name"
                   type="text"
                   handleChange=""

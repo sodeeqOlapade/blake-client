@@ -32,13 +32,13 @@ function Login(props) {
               type="password"
               handleChange=""
             />
+            <Button
+              type="primary"
+              textValue="Login"
+              className={styles.signupButton}
+            />
           </form>
 
-          <Button
-            primary={false}
-            textValue="Login"
-            className={styles.signupButton}
-          />
           <p>
             Don't have an account?{' '}
             <Link className={styles.link} to="/signup">

@@ -3,10 +3,14 @@ import styles from './card.module.css';
 
 function Card({ imagename, title, description }) {
   return (
-    <div className={styles.card}>
-      <img src={require(`../../../assets/images/${imagename}`)} />
-      <h4>{title}</h4>
-      <p>{description}</p>
+    <div class={styles.benefitWrapper}>
+      <img
+        src={require(`../../../assets/images/${imagename}`)}
+        alt={`${title}-image`}
+        class={styles.proofIcon}
+      />
+      <h3>{title}</h3>
+      <div class={styles.subHeading}>{description}</div>
     </div>
   );
 }

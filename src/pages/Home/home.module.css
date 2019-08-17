@@ -4,23 +4,43 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  height: 500px;
+  border: 1px solid red;
   background: #ffffff;
-  padding: 90px 0px;
 }
 
-.bannerText {
+.mainDisplayText {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: center;
+  padding-top: 130px;
+  padding-bottom: 30px;
+  text-align: center;
+  margin: 0px;
+  background: #8273d4;
+  width: 100%;
+  color: #ffffff;
+  height: fit-content;
 }
 
-.bannerPic {
-  background: url('./images/banner.png');
-  width: 42%;
+.mainDisplayText p {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin: 0px;
+}
+
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0px;
+}
+.bannerPic img {
+  width: 50%;
   height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: 0;
-  /* border: 1px solid orange; */
 }
 
 .bannerText {
@@ -28,9 +48,14 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  width: 42%;
+  width: 50%;
   z-index: 0;
-  /* border: 1px solid red; */
+  border: 1px solid blue;
+}
+
+.testimonials {
+  width: 50%;
+  border: #068dfd 1px solid;
 }
 
 .texts {
@@ -42,7 +67,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 3rem;
   padding: 50px 10px 50px 80px;
-  /* border: 1px solid green; */
+  border: 1px solid green;
 }
 
 .use {
@@ -50,19 +75,11 @@
 }
 
 .connect {
-  color: #705ecf;
+  color: #068dfd;
 }
 
 .business {
   color: #18a668;
-}
-
-.buttons {
-  /* border: 1px solid purple; */
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  padding: 0px 10px 0px 80px;
 }
 
 button {
@@ -71,8 +88,10 @@ button {
 
 .pros {
   text-align: center;
-  margin: 90px 0px;
+  margin: 0px;
+  padding: 80px 0px;
   font-size: 50px;
+  background: #f6f6f6;
 }
 
 .cards {
@@ -81,5 +100,6 @@ button {
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  margin-bottom: 100px;
+  padding-bottom: 60px;
+  background: #f6f6f6;
 }
