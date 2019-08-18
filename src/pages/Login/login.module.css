@@ -18,6 +18,11 @@ body {
   /* border: 1px solid green; */
 }
 
+.inputError {
+  color: #EB406D;
+  margin: 0px !important;
+}
+
 .formcontainer {
   padding: 1rem;
   border-radius: 5px;
@@ -31,20 +36,19 @@ body {
   margin: 0px;
 }
 
-.formcontainer form{
+.formcontainer form {
   margin-top: 15px;
 }
 
-.formcontainer p{
+.formcontainer p {
   margin-top: 1.5rem;
 }
 
-.link{
+.link {
   color: #705ecf;
 }
 
-.formcontainer:hover{
+.formcontainer:hover {
   transform: scale(1.05);
   transition: all 0.5s;
 }
-

@@ -7,6 +7,7 @@ import Contact from '../pages/Contact Us/contact';
 import Login from '../pages/Login/login';
 import Dashboard from '../pages/dashboard/dashboard';
 import LoginstatusContext from '../context';
+import BusinessSignup from '../pages/Business/businessSignup';
 
 const Routes = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -19,6 +20,7 @@ const Routes = () => {
           {/* to be replaced by About page when done */}
           <Route path="/about" component={Dashboard} />
           <Route path="/signup" component={Signup} />
+          <Route path="/business_signup" component={BusinessSignup} />
           <Route path="/login" component={Login} />
         </div>
       </Router>

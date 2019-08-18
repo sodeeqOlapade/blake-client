@@ -5,8 +5,19 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import Input from '../../components/input/input';
 import Button from '../../components/button/button';
+import useForm from '../../helpers/useForm';
+import { loginValidation } from '../../helpers/validations';
 
 function Login(props) {
+  const { values, errors, handleChange, handleSubmit } = useForm(
+    login,
+    loginValidation
+  );
+
+  function login() {
+    console.log('No errors, submit callback called!');
+  }
+
   return (
     <>
       <Header />
@@ -15,23 +26,27 @@ function Login(props) {
         <div className={styles.formcontainer}>
           <h2>Welcome Back,</h2>
           <h3>Please Login.</h3>
-          <form>
+          <form onSubmit={handleSubmit}>
             <Input
               placeholder="E.g abx@example.com"
               id="email"
-              value=""
+              value={values.email || ''}
               label="email"
               type="email"
-              handleChange=""
+              handleChange={handleChange}
             />
+            {errors.email && <p className={styles.inputError}>{errors.email}</p>}
             <Input
               placeholder="E.g $abc123$"
               id="password"
-              value=""
+              value={values.password || ''}
               label="password"
               type="password"
-              handleChange=""
+              handleChange={handleChange}
             />
+            {errors.password && (
+              <p className={styles.inputError}>{errors.password}</p>
+            )}
             <Button
               type="primary"
               textValue="Login"

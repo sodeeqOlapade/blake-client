@@ -7,6 +7,7 @@ function Input({ label, id, placeholder, value, type, handleChange }) {
       {/* {label.toUpperCase()} */}
       <input
         id={id}
+        name = {id}
         placeholder={placeholder}
         value={value}
         type={type}
