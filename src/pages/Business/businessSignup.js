@@ -1,28 +1,94 @@
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import axios from 'axios';
 import styles from './businessSignup.module.css';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import Input from '../../components/input/input';
 import Button from '../../components/button/button';
 import useForm from '../../helpers/useForm';
-import { customerValidation } from '../../helpers/validations';
+import { businessValidation } from '../../helpers/validations';
+import FormAlert from '../../components/Alerts/Form Alerts';
 
 function BusinessSignup(props) {
-  const [business, setBusiness] = useState(true);
   const { values, errors, handleChange, handleSubmit } = useForm(
-    signup,
-    customerValidation
+    signupBusiness,
+    businessValidation
   );
 
-  const handleClick = event => {
-    setBusiness(!business);
-  };
+  const [alert, setAlert] = useState({ show: false, type: '', msg: '' });
 
-  function signup() {
-    console.log('No errors, submit callback called!');
+  async function signupBusiness(values) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const {
+      name,
+      email,
+      password,
+      phonenumber: phoneOne,
+      address: officeAddress
+    } = values;
+
+    const body = {
+      name,
+      email,
+      password,
+      phoneOne,
+      officeAddress
+    };
+    try {
+      const res = await axios({
+        method: 'post',
+        url: 'http://localhost:8000/api/businesses',
+        data: body,
+        config
+      });
+
+      if (res.data.statusCode !== 200) {
+        setAlert({
+          show: true,
+          type: 'form-alert-danger',
+          msg: res.data.message
+        });
+        setTimeout(() => {
+          setAlert({
+            ...alert,
+            show: false
+          });
+        }, 3000);
+        return;
+      }
+
+      localStorage.setItem('token', res.data.token);
+
+      setAlert({
+        show: true,
+        type: 'form-alert-success',
+        msg: res.data.message
+      });
+      setTimeout(() => {
+        setAlert({
+          ...alert,
+          show: false
+        });
+      }, 3000);
+    } catch (error) {
+      setAlert({
+        show: true,
+        type: 'form-alert-danger',
+        msg: 'Sign Up Failed! Please Try again.'
+      });
+      setTimeout(() => {
+        setAlert({
+          ...alert,
+          show: false
+        });
+      }, 5000);
+    }
   }
-
   return (
     <>
       <Header />
@@ -33,10 +99,15 @@ function BusinessSignup(props) {
           <h3>Please Signup.</h3>
           <>
             <form onSubmit={handleSubmit}>
+              {alert.show ? (
+                <FormAlert type={alert.type}>{alert.msg}</FormAlert>
+              ) : (
+                ''
+              )}
               <Input
                 placeholder="fullname"
                 id="name"
-                value={values.name}
+                value={values.name || ''}
                 label="name"
                 type="text"
                 handleChange={handleChange}
@@ -47,7 +118,7 @@ function BusinessSignup(props) {
               <Input
                 placeholder="email"
                 id="email"
-                value={values.email}
+                value={values.email || ''}
                 label="email"
                 type="email"
                 handleChange={handleChange}
@@ -59,7 +130,7 @@ function BusinessSignup(props) {
               <Input
                 placeholder="phone number"
                 id="phonenumber"
-                value={values.phonenumber}
+                value={values.phonenumber || ''}
                 label="phonenumber"
                 type="number"
                 handleChange={handleChange}
@@ -71,7 +142,7 @@ function BusinessSignup(props) {
               <Input
                 placeholder="address"
                 id="address"
-                value={values.address}
+                value={values.address || ''}
                 label="address"
                 type="text"
                 handleChange={handleChange}
@@ -83,7 +154,7 @@ function BusinessSignup(props) {
               <Input
                 placeholder="password"
                 id="password"
-                value={values.password}
+                value={values.password || ''}
                 label="password"
                 type="password"
                 handleChange={handleChange}
@@ -95,7 +166,7 @@ function BusinessSignup(props) {
               <Input
                 placeholder="confirm password"
                 id="cpassword"
-                value={values.cpassword}
+                value={values.cpassword || ''}
                 label="cpassword"
                 type="password"
                 handleChange={handleChange}
@@ -123,7 +194,6 @@ function BusinessSignup(props) {
                   primary={true}
                   textValue="SIGN UP AS A CUSTOMER"
                   className={styles.signupButton}
-                  // click={handleClick}
                 />
               </Link>
             </div>

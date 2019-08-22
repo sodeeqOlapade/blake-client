@@ -13,7 +13,7 @@ export const loginValidation = function(values) {
   return errors;
 };
 
-export const customerValidation = function(values) {
+export const businessValidation = function(values) {
   let errors = {};
   if (!values.name) {
     errors.name = 'Fullname is required';
@@ -32,7 +32,7 @@ export const customerValidation = function(values) {
   }
   if (!values.address) {
     errors.address = 'address is required';
-  } else if (!/\w\s/.test(values.address)) {
+  } else if (!/[A-Za-z0-9'\.\-\s\,]/.test(values.address)) {
     errors.address = 'Enter a valid address';
   }
   if (!values.password) {
@@ -48,10 +48,12 @@ export const customerValidation = function(values) {
   return errors;
 };
 
-export const businessValidation = function(values) {
+export const customerValidation = function(values) {
   let errors = {};
   if (!values.name) {
     errors.name = 'Fullname is required';
+  } else if (values.name.length < 3) {
+    errors.name = 'Name should be at least 3 characters long';
   } else if (!/[a-z A-Z \s]/.test(values.name)) {
     errors.name = 'Fullname is invalid';
   }
